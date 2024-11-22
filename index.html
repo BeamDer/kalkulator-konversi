@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Konversi Unit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kalkulator Konversi Unit</h1>
+        <label for="value">Masukkan Nilai:</label>
+        <input type="number" id="value" placeholder="Masukkan nilai" />
+
+        <label for="unitFrom">Dari:</label>
+        <select id="unitFrom">
+            <option value="km">Kilometer</option>
+            <option value="celsius">Celsius</option>
+        </select>
+
+        <label for="unitTo">Ke:</label>
+        <select id="unitTo">
+            <option value="miles">Mil</option>
+            <option value="fahrenheit">Fahrenheit</option>
+        </select>
+
+        <button onclick="convert()">Konversi</button>
+
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        function convert() {
+            const value = parseFloat(document.getElementById('value').value);
+            const unitFrom = document.getElementById('unitFrom').value;
+            const unitTo = document.getElementById('unitTo').value;
+            let result;
+
+            // Ambil digit terakhir dari NIM (misalnya NIM = 123456789, digit terakhir = 9)
+            const nim = 123456789; // Ganti dengan NIM Anda
+            const lastDigit = nim % 10 === 0 ? Math.floor(nim / 10) % 10 : nim % 10;
+
+            if (unitFrom === 'km' && unitTo === 'miles') {
+                result = value * 0.621371; // Konversi kilometer ke mil
+            } else if (unitFrom === 'celsius' && unitTo === 'fahrenheit') {
+                result = (value * 9/5) + 32; // Konversi Celsius ke Fahrenheit
+            } else {
+                result = "Unit tidak valid!";
+            }
+
+            // Sesuaikan hasil berdasarkan digit terakhir NIM
+            result = result.toFixed(lastDigit); // Mengatur jumlah digit desimal
+
+            document.getElementById('result').innerText = `Hasil: ${result}`;
+        }
+    </script>
+</body>
+</html>
